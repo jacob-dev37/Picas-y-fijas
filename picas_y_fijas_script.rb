@@ -19,5 +19,32 @@ def generar
     end
     @numero
 end
-
+#Procesar respuesta del usuario
+def respuesta
+    @respuesta = 0
+    picas = 0
+    fijas = 0
+    until @respuesta == @numero.join
+        system("clear")
+        titulo
+        puts "Picas: #{picas}"
+        puts "Fijas: #{fijas}"
+        print "Escribe un numero de 4 cifras: "
+        @respuesta = gets.chomp.chars.uniq.join
+        if @respuesta.length == 4
+            picas = 0
+            fijas = 0
+            4.times do |x|
+                if @respuesta[x].to_i == @numero[x]
+                    fijas += 1
+                elsif @numero.include?(@respuesta[x].to_i)
+                    picas += 1
+                end
+            end
+        end
+    end
+end
 puts generar.join
+respuesta
+system("clear")
+puts "Felicidades, ganaste!"
