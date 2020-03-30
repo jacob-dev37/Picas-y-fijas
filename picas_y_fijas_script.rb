@@ -1,11 +1,11 @@
 #Juego de adivinar numero recibiendo algunas pistas
+require 'tty-font'
+require 'rainbow'
+
 def titulo
-puts ' ____        _____'
-puts '|  _ \\ _   _|  ___|'
-puts '| |_) | | | | |_   '
-puts '|  __/| |_| |  _|  '
-puts '|_|    \\__, |_|    '
-puts '       |___/'
+texto = TTY::Font.new(:straight)
+titulo = texto.write("Picas y fijas")
+puts Rainbow(titulo).green.background(:lightgray)
 puts "\nAdivina el numero de 4 cifras que he generado"
 end
 #Generar numero de 4 cifras que no se repitan
@@ -27,8 +27,8 @@ def respuesta
     until @respuesta == @numero.join
         system("clear")
         titulo
-        puts "Picas: #{picas}"
-        puts "Fijas: #{fijas}"
+        puts "Picas: " + Rainbow(picas).color("#FF1560").bright.blink
+        puts "Fijas: " + Rainbow(fijas).color("#FF1560").bright.blink
         print "Escribe un numero de 4 cifras: "
         @respuesta = gets.chomp.chars.uniq.join
         if @respuesta.length == 4
@@ -47,4 +47,4 @@ end
 puts generar.join
 respuesta
 system("clear")
-puts "Felicidades, ganaste!"
+puts Rainbow("Felicidades, ganaste!").green.bright.blink
